@@ -10,13 +10,13 @@ public abstract class BattleParticipant {
     protected int armySize;
     protected DiceCollection diceCollection;
 
-    public BattleParticipant(int armySize) {
+    public BattleParticipant(final int armySize) {
         Preconditions.checkArgument(armySize >= getMinArmySize(),
                 String.format("Army must have at least %s soldiers", getMinArmySize()));
+        this.setDiceCollection(armySize);
         this.armySize = armySize;
-        this.setDiceCollection();
     }
 
     public abstract int getMinArmySize();
-    protected abstract void setDiceCollection();
+    protected abstract void setDiceCollection(int armySize);
 }

@@ -16,7 +16,7 @@ public class Defender extends BattleParticipant {
     }
 
     @Override
-    protected void setDiceCollection() {
+    protected void setDiceCollection(final int armySize) {
         diceCollection = new DiceCollection((armySize == 1) ? 1 : 2, 6);
     }
 }

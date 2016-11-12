@@ -14,7 +14,7 @@ public class Attacker extends BattleParticipant {
     }
 
     @Override
-    protected void setDiceCollection() {
+    protected void setDiceCollection(final int armySize) {
         diceCollection = new DiceCollection((armySize >= 2 && armySize <= 4) ? armySize - 1 : 3, 6);
     }
 }

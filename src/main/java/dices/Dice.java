@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import java.util.Random;
 
-public final class Dice {
+public class Dice {
 
     public static final int MIN_FACES_NUM = 4;
     public static final int MIN_ROLL_RESULT = 1;

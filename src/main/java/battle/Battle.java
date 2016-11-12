@@ -1,5 +1,6 @@
 package battle;
 
+import dices.DiceCollectionRollResult;
 import participants.Attacker;
 import participants.Defender;
 
@@ -13,6 +14,21 @@ public class Battle {
         this.defender = new Defender(defendingArmySize);
     };
 
+    public BattleResult execute() {
+        while (battleFinished()) {
+            break;
+        }
+        return null;
+    }
 
+    private boolean battleFinished() {
+        if (attacker.getArmySize() == 1 || defender.getArmySize() == 0) {
+            return true;
+        }
+        return false;
+    }
 
+    private void executeRoll() {
+
+    }
 }
