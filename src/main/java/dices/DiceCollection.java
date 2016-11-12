@@ -20,7 +20,7 @@ public class DiceCollection {
     }
 
     public DiceCollection(final int dicesNum, final int facesNum) {
-        Preconditions.checkArgument(dicesNum >= 2,
+        Preconditions.checkArgument(dicesNum >= 1,
                 "Collection of dices must contain at least two dices");
 
         List<Dice> dices = new ArrayList<Dice>();

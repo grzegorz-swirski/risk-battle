@@ -32,4 +32,28 @@ public class AttackerTest {
         sut = new Attacker(expectedArmySize);
         assertEquals(expectedArmySize, sut.getArmySize());
     }
+
+    @Test
+    public void instantiate_twoSoldiers_oneDice() {
+        sut = new Attacker(2);
+        assertEquals(1, sut.getDiceCollection().getDices().size());
+    }
+
+    @Test
+    public void instantiate_threeSoldiers_twoDices() {
+        sut = new Attacker(3);
+        assertEquals(2, sut.getDiceCollection().getDices().size());
+    }
+
+    @Test
+    public void instantiate_fourSoldiers_threeDices() {
+        sut = new Attacker(4);
+        assertEquals(3, sut.getDiceCollection().getDices().size());
+    }
+
+    @Test
+    public void instantiate_fiveSoldiers_threeDices() {
+        sut = new Attacker(5);
+        assertEquals(3, sut.getDiceCollection().getDices().size());
+    }
 }

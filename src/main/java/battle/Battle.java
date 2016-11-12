@@ -13,4 +13,6 @@ public class Battle {
         this.defender = new Defender(defendingArmySize);
     };
 
+
+
 }

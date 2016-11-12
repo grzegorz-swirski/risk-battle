@@ -1,26 +1,29 @@
 package dices;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 @RunWith(MockitoJUnitRunner.class)
 public class DiceCollectionTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void instantiate_zeroDices_throwIllegalArgument() {
-        DiceCollection sut = new DiceCollection(0, 6);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void instantiate_oneDice_throwIllegalArgument() {
-        DiceCollection sut = new DiceCollection(1, 6);
-    }
+    private DiceCollection sut;
 
     @Test(expected = NullPointerException.class)
     public void instantiate_nullCollection_throwNullPointer() {
-        DiceCollection sut = new DiceCollection(null);
+        sut = new DiceCollection(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void instantiate_zeroDices_throwIllegalArgument() {
+        sut = new DiceCollection(0, 6);
+    }
+
+    public void instantiate_oneDice_validCollectionInstantiated() {
+        sut = new DiceCollection(1, 6);
     }
 
     @Test
@@ -28,10 +31,10 @@ public class DiceCollectionTest {
         int dicesNum = 10;
         int facesNum = 6;
 
-        DiceCollection sut = new DiceCollection(dicesNum, facesNum);
+        sut = new DiceCollection(dicesNum, facesNum);
 
-        Assert.assertEquals(sut.getDices().size(), dicesNum);
-        Assert.assertTrue(sut.getDices().stream()
+        assertEquals(dicesNum, sut.getDices().size());
+        assertTrue(sut.getDices().stream()
                         .allMatch(dice -> dice.getFacesNum() == facesNum)
         );
     }
