@@ -36,19 +36,30 @@ public class DiceTest {
     public void rollDice() {
         sut = new Dice(randomGenerator, diceFacesNum);
         sut.roll();
-        verify(randomGenerator, times(1)).nextInt(diceFacesNum + 1);
+        verify(randomGenerator, times(1)).nextInt(diceFacesNum);
     }
 
     @Test
     public void rollDice_minRollResultIsOne() {
         int minRandomNumber = 0;
         int minExpectedRollResult = 1;
-        when(randomGenerator.nextInt(anyInt())).thenReturn(0);
+        when(randomGenerator.nextInt(anyInt())).thenReturn(minRandomNumber);
+
 
         sut = new Dice(randomGenerator, diceFacesNum);
-        int acturalRollResult = sut.roll().getValue();
+        int actualRollResult = sut.roll().getValue();
 
-        Assert.assertEquals(minExpectedRollResult, acturalRollResult);
+        Assert.assertEquals(minExpectedRollResult, actualRollResult);
     }
 
+    @Test
+    public void rollDice_maxRollResultAsExpected() {
+        int expectedMaxRollResult = diceFacesNum;
+        when(randomGenerator.nextInt(anyInt())).thenReturn(expectedMaxRollResult - 1);
+
+        sut = new Dice(randomGenerator, diceFacesNum);
+        int actualRollResult = sut.roll().getValue();
+
+        Assert.assertEquals(expectedMaxRollResult, actualRollResult);
+    }
 }

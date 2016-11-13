@@ -26,7 +26,9 @@ public class Dice {
     }
 
     public DiceRollResult roll() {
-        int rollResultValue = MIN_ROLL_RESULT + randomGenerator.nextInt(facesNum + 1);
+        // draw value from 0 inclusive to 5 inclusive and add 1
+        int rollResultValue = MIN_ROLL_RESULT + randomGenerator.nextInt(facesNum);
+
         return new DiceRollResult(rollResultValue);
     }
 }
