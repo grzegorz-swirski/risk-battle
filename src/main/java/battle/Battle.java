@@ -1,15 +1,11 @@
 package battle;
 
 import com.google.common.base.Preconditions;
-import dices.DiceCollectionRollResult;
 import dices.DiceRollResult;
 import participants.Attacker;
 import participants.Defender;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-import com.google.common.collect.Lists;
+import java.util.Collection;
 
 public class Battle {
 
@@ -38,23 +34,15 @@ public class Battle {
     }
 
     private void executeRoll() {
-        DiceCollectionRollResult attackerResult = attacker.rollDices();
-        DiceCollectionRollResult defenderResult = defender.rollDices();
+        Collection<DiceRollResult> attackerResult = attacker.rollDices();
+        Collection<DiceRollResult> defenderResult = defender.rollDices();
         compareAndTakeDamage(attackerResult, defenderResult);
     }
 
-    private void compareAndTakeDamage(DiceCollectionRollResult attackerResult,
-                                      DiceCollectionRollResult defenderResult) {
+    private void compareAndTakeDamage(Collection<DiceRollResult> attackerResult,
+                                      Collection<DiceRollResult> defenderResult) {
         int attackerDamage, defenderDamage = 0;
 
-        ArrayList<DiceRollResult> attackerSortedResults =
-                Lists.newArrayList(getSorted(attackerResult));
 
-        ArrayList<DiceRollResult> defenderSortedResults =
-                Lists.newArrayList(getSorted(defenderResult));
-    }
-
-    private List<DiceRollResult> getSorted(DiceCollectionRollResult result) {
-        return result.getDiceRollResults().stream().sorted().collect(Collectors.toList());
     }
 }

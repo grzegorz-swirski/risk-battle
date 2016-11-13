@@ -34,9 +34,9 @@ public class DiceCollection {
         this.dices = ImmutableList.copyOf(dices);
     }
 
-    public DiceCollectionRollResult roll() {
+    public Collection<DiceRollResult> roll() {
         Collection<DiceRollResult> rollResults = new ArrayList<>();
         dices.stream().forEach(dice -> rollResults.add(dice.roll()));
-        return new DiceCollectionRollResult(rollResults);
+        return rollResults;
     }
 }

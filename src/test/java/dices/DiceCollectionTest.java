@@ -84,9 +84,9 @@ public class DiceCollectionTest {
         when(diceMock.roll()).thenReturn(new DiceRollResult(1));
 
         sut = new DiceCollection(dices);
-        DiceCollectionRollResult result = sut.roll();
+        Collection<DiceRollResult> result = sut.roll();
 
-        assertEquals(diceCollectionSize, result.getDiceRollResults().size());
+        assertEquals(diceCollectionSize, result.size());
     }
 
     private Collection<Dice> getTestDiceCollection(int size) {

@@ -1,6 +1,5 @@
 package battle;
 
-import dices.DiceCollectionRollResult;
 import dices.DiceRollResult;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class BattleTest {
 
     private Battle sut;
-    private DiceCollectionRollResult sampleRollResult;
+    private Collection<DiceRollResult> sampleRollResults;
 
     @Mock
     private Attacker attackerMock;
@@ -34,17 +33,16 @@ public class BattleTest {
     @Before
     public void init() {
         sut = new Battle(attackerMock, defenderMock);
-        Optional<DiceCollectionRollResult> resultOptional = Optional.ofNullable(sampleRollResult);
-        sampleRollResult = resultOptional.orElseGet(BattleTest::getSampleRollResult);
+        Optional<Collection<DiceRollResult>> resultOptional = Optional.ofNullable(sampleRollResults);
+        sampleRollResults = resultOptional.orElseGet(BattleTest::getSampleRollResult);
     }
 
-    private static DiceCollectionRollResult getSampleRollResult() {
+    private static Collection<DiceRollResult> getSampleRollResult() {
         Collection<DiceRollResult> diceRollResults = new ArrayList<>();
         diceRollResults.add(new DiceRollResult(6));
         diceRollResults.add(new DiceRollResult(1));
         diceRollResults.add(new DiceRollResult(3));
-
-        return new DiceCollectionRollResult(diceRollResults);
+        return diceRollResults;
     }
 
     @Test(expected = NullPointerException.class)
@@ -71,8 +69,8 @@ public class BattleTest {
     public void execute_BattleNotFinished_executeRoll() {
         when(attackerMock.getArmySize()).thenReturn(5).thenReturn(3).thenReturn(1);
         when(defenderMock.getArmySize()).thenReturn(5).thenReturn(3).thenReturn(1);
-        when(attackerMock.rollDices()).thenReturn(sampleRollResult);
-        when(defenderMock.rollDices()).thenReturn(sampleRollResult);
+        when(attackerMock.rollDices()).thenReturn(sampleRollResults);
+        when(defenderMock.rollDices()).thenReturn(sampleRollResults);
         int expectedRollExecutions = 2;
 
         sut.execute();

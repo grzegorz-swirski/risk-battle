@@ -2,8 +2,10 @@ package participants;
 
 import com.google.common.base.Preconditions;
 import dices.DiceCollection;
-import dices.DiceCollectionRollResult;
+import dices.DiceRollResult;
 import lombok.Getter;
+
+import java.util.Collection;
 
 @Getter
 public abstract class BattleParticipant {
@@ -18,7 +20,7 @@ public abstract class BattleParticipant {
         this.armySize = armySize;
     }
 
-    public DiceCollectionRollResult rollDices() {
+    public Collection<DiceRollResult> rollDices() {
         return diceCollection.roll();
     }
 

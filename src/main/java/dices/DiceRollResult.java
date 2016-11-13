@@ -16,6 +16,6 @@ public class DiceRollResult implements Comparable<DiceRollResult> {
 
     @Override
     public int compareTo(DiceRollResult other) {
-        return -1 * Integer.compare(value, other.getValue());
+        return Integer.compare(value, other.getValue());
     }
 }
