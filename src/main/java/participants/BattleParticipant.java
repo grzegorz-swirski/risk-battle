@@ -24,6 +24,11 @@ public abstract class BattleParticipant {
         return diceCollection.roll();
     }
 
+    public void damage(int lostSoldiersNum) {
+        armySize -= lostSoldiersNum;
+        setDiceCollection(armySize);
+    }
+
     public abstract int getMinArmySize();
     protected abstract void setDiceCollection(int armySize);
 }

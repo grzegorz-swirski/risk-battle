@@ -3,14 +3,12 @@ package battle;
 import com.google.common.base.Preconditions;
 import dices.DiceRollResult;
 import participants.Attacker;
-import participants.BattleParticipant;
 import participants.Defender;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Battle {
 
@@ -26,8 +24,12 @@ public class Battle {
 
     public BattleResult execute() {
         while (!battleFinished()) {
-            ArrayList<DiceRollResult> attackerResults = rollAndSortResults(attacker);
-            ArrayList<DiceRollResult> defenderResults = rollAndSortResults(defender);
+            ArrayList<DiceRollResult> attackerResults = new ArrayList<>(attacker.rollDices());
+            Collections.sort(attackerResults, Comparator.reverseOrder());
+
+            ArrayList<DiceRollResult> defenderResults = new ArrayList<>(defender.rollDices());
+            Collections.sort(defenderResults, Comparator.reverseOrder());
+
             compareAndTakeDamage(attackerResults, defenderResults);
         }
         return new BattleResult(attacker.getArmySize(), defender.getArmySize());
@@ -40,16 +42,15 @@ public class Battle {
         return false;
     }
 
-    private ArrayList<DiceRollResult> rollAndSortResults(BattleParticipant participant) {
-        ArrayList<DiceRollResult> rollResults = new ArrayList<>(participant.rollDices());
-        Collections.sort(rollResults, Collections.reverseOrder());
-        return rollResults;
-    }
+    private void compareAndTakeDamage(List<DiceRollResult> attackerResults,
+                                      List<DiceRollResult> defenderResults) {
+        for (int i = 0; i < defenderResults.size(); i++) {
+            if (defenderResults.get(i).getValue() >= attackerResults.get(i).getValue()) {
+                attacker.damage(1);
+            } else {
+                defender.damage(1);
+            }
+        }
 
-    private void compareAndTakeDamage(ArrayList<DiceRollResult> attackerResults,
-                                      ArrayList<DiceRollResult> defenderResults) {
-        // for each defender compare with attacker and:
-        // attacker.takeDamage(int k)
-        // defender.takeDamage(int p)
     }
 }
