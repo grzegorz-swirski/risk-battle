@@ -36,9 +36,7 @@ public class DiceCollection {
 
     public DiceCollectionRollResult roll() {
         Collection<DiceRollResult> rollResults = new ArrayList<>();
-        for (Dice dice : dices) {
-            rollResults.add(dice.roll());
-        }
+        dices.stream().forEach(dice -> rollResults.add(dice.roll()));
         return new DiceCollectionRollResult(rollResults);
     }
 }

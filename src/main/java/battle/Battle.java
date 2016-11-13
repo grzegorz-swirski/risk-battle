@@ -1,24 +1,33 @@
 package battle;
 
+import com.google.common.base.Preconditions;
 import dices.DiceCollectionRollResult;
+import dices.DiceRollResult;
 import participants.Attacker;
 import participants.Defender;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import com.google.common.collect.Lists;
 
 public class Battle {
 
     private Attacker attacker;
     private Defender defender;
 
-    public Battle(int attackingArmySize, int defendingArmySize) {
-        this.attacker = new Attacker(attackingArmySize);
-        this.defender = new Defender(defendingArmySize);
+    public Battle(Attacker attacker, Defender defender) {
+        Preconditions.checkNotNull(attacker, "Attacker may not be null.");
+        Preconditions.checkNotNull(defender, "Defender may not be null.");
+        this.attacker = attacker;
+        this.defender = defender;
     };
 
     public BattleResult execute() {
-        while (battleFinished()) {
-            break;
+        while (!battleFinished()) {
+            executeRoll();
         }
-        return null;
+        return new BattleResult(attacker.getArmySize(), defender.getArmySize());
     }
 
     private boolean battleFinished() {
@@ -29,6 +38,23 @@ public class Battle {
     }
 
     private void executeRoll() {
+        DiceCollectionRollResult attackerResult = attacker.rollDices();
+        DiceCollectionRollResult defenderResult = defender.rollDices();
+        compareAndTakeDamage(attackerResult, defenderResult);
+    }
 
+    private void compareAndTakeDamage(DiceCollectionRollResult attackerResult,
+                                      DiceCollectionRollResult defenderResult) {
+        int attackerDamage, defenderDamage = 0;
+
+        ArrayList<DiceRollResult> attackerSortedResults =
+                Lists.newArrayList(getSorted(attackerResult));
+
+        ArrayList<DiceRollResult> defenderSortedResults =
+                Lists.newArrayList(getSorted(defenderResult));
+    }
+
+    private List<DiceRollResult> getSorted(DiceCollectionRollResult result) {
+        return result.getDiceRollResults().stream().sorted().collect(Collectors.toList());
     }
 }

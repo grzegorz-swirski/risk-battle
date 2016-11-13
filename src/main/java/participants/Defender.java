@@ -1,8 +1,6 @@
 package participants;
 
-import com.google.common.base.Preconditions;
 import dices.DiceCollection;
-import lombok.Getter;
 
 public class Defender extends BattleParticipant {
 
