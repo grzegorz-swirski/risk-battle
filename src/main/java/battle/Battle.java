@@ -25,11 +25,7 @@ public class Battle {
     public BattleResult execute() {
         while (!battleFinished()) {
             ArrayList<DiceRollResult> attackerResults = new ArrayList<>(attacker.rollDices());
-            Collections.sort(attackerResults, Comparator.reverseOrder());
-
             ArrayList<DiceRollResult> defenderResults = new ArrayList<>(defender.rollDices());
-            Collections.sort(defenderResults, Comparator.reverseOrder());
-
             compareAndTakeDamage(attackerResults, defenderResults);
         }
         return new BattleResult(attacker.getArmySize(), defender.getArmySize());
@@ -44,13 +40,15 @@ public class Battle {
 
     private void compareAndTakeDamage(List<DiceRollResult> attackerResults,
                                       List<DiceRollResult> defenderResults) {
-        for (int i = 0; i < defenderResults.size(); i++) {
+        Collections.sort(attackerResults, Comparator.reverseOrder());
+        Collections.sort(defenderResults, Comparator.reverseOrder());
+        int activeDicesNum = Math.min(defenderResults.size(), attackerResults.size());
+        for (int i = 0; i < activeDicesNum; i++) {
             if (defenderResults.get(i).getValue() >= attackerResults.get(i).getValue()) {
                 attacker.damage(1);
             } else {
                 defender.damage(1);
             }
         }
-
     }
 }

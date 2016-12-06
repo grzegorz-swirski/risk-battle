@@ -40,7 +40,7 @@ public class DiceTest {
     }
 
     @Test
-    public void rollDice_minRollResultIsOne() {
+    public void rollDice_minRollResult_resultEqualsOne() {
         int minRandomNumber = 0;
         int minExpectedRollResult = 1;
         when(randomGenerator.nextInt(anyInt())).thenReturn(minRandomNumber);
@@ -53,7 +53,7 @@ public class DiceTest {
     }
 
     @Test
-    public void rollDice_maxRollResultAsExpected() {
+    public void rollDice_maxRollResult_resultEqualsFacesNum() {
         int expectedMaxRollResult = diceFacesNum;
         when(randomGenerator.nextInt(anyInt())).thenReturn(expectedMaxRollResult - 1);
 

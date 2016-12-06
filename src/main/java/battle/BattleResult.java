@@ -1,7 +1,9 @@
 package battle;
 
 import com.google.common.base.Preconditions;
+import lombok.Getter;
 
+@Getter
 public class BattleResult {
 
     private final int attackingArmySize;
