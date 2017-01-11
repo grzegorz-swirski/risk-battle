@@ -15,4 +15,10 @@ public class BattleResult {
         this.attackingArmySize = attackingArmySize;
         this.defendingArmySize = defendingArmySize;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Attacker: %s\nDefender: %s",
+                attackingArmySize, defendingArmySize);
+    }
 }
