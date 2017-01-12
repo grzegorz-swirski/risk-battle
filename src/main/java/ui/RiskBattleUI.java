@@ -1,5 +1,9 @@
 package ui;
 
+import battle.Battle;
+import participants.Attacker;
+import participants.Defender;
+
 import javax.swing.*;
 import java.awt.*;
 

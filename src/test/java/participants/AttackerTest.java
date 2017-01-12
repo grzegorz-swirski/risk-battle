@@ -56,4 +56,18 @@ public class AttackerTest {
         sut = new Attacker(5);
         assertEquals(3, sut.getDiceCollection().getDices().size());
     }
+
+    @Test
+    public void takeDamage_armySizeDecremented() {
+        sut = new Attacker(10);
+        sut.damage(1);
+        assertEquals(9, sut.getArmySize());
+    }
+
+    @Test
+    public void takeDamage_oneSoldierLeft_effectiveArmyZero_emptyDiceCollection(){
+        sut = new Attacker(2);
+        sut.damage(1);
+        assertEquals(0, sut.getDiceCollection().getDices().size());
+    }
 }

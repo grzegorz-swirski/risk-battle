@@ -18,8 +18,8 @@ public abstract class BattleParticipant {
     public BattleParticipant(final int armySize) {
         Preconditions.checkArgument(armySize >= getMinArmySize(),
                 String.format("Army must have at least %s soldiers", getMinArmySize()));
-        this.setDiceCollection(armySize);
         this.armySize = armySize;
+        this.setDiceCollection(this.armySize);
     }
 
     public Collection<DiceRollResult> rollDices() {
@@ -31,6 +31,13 @@ public abstract class BattleParticipant {
         setDiceCollection(armySize);
     }
 
+    private void setDiceCollection(int armySize) {
+        int effectiveArmySize = getEffectiveArmySize();
+        diceCollection = new DiceCollection((effectiveArmySize < getMaxDicesNum()) ?
+                effectiveArmySize : getMaxDicesNum(), DICE_FACES_NUM);
+    }
+
+    public abstract int getEffectiveArmySize();
     public abstract int getMinArmySize();
-    protected abstract void setDiceCollection(int armySize);
+    public abstract int getMaxDicesNum();
 }

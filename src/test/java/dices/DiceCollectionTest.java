@@ -32,9 +32,10 @@ public class DiceCollectionTest {
         sut = new DiceCollection(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void instantiate_zeroDices_throwIllegalArgument() {
+    @Test
+    public void instantiate_zeroDices_emptyDiceCollection() {
         sut = new DiceCollection(0, 6);
+        assertEquals(0, sut.getDices().size());
     }
 
     public void instantiate_oneDice_validCollectionInstantiated() {

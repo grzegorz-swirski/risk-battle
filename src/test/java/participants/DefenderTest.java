@@ -45,4 +45,25 @@ public class DefenderTest {
         sut = new Defender(3);
         assertEquals(2, sut.getDiceCollection().getDices().size());
     }
+
+    @Test
+    public void takeDamage_armySizeDecremented() {
+        sut = new Defender(10);
+        sut.damage(1);
+        assertEquals(9, sut.getArmySize());
+    }
+
+    @Test
+    public void takeDamage_oneSoldierLeft_effectiveArmyOne_oneDice() {
+        sut = new Defender(2);
+        sut.damage(1);
+        assertEquals(1, sut.getDiceCollection().getDices().size());
+    }
+
+    @Test
+    public void takeDamage_noSoldiersLeft_effectiveArmyZero_emptyDiceCollection() {
+        sut = new Defender(1);
+        sut.damage(1);
+        assertEquals(0, sut.getDiceCollection().getDices().size());
+    }
 }

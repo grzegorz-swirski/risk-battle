@@ -13,13 +13,16 @@ public class Attacker extends BattleParticipant {
 
     @Override
     public int getMinArmySize() {
-        return 2;
+        return MIN_ARMY_SIZE;
     }
 
     @Override
-    protected void setDiceCollection(final int armySize) {
-        int effectiveArmySize = armySize - 1;
-        diceCollection = new DiceCollection((effectiveArmySize < MAX_DICES_NUM) ?
-                effectiveArmySize : MAX_DICES_NUM, DICE_FACES_NUM);
+    public int getMaxDicesNum() {
+        return MAX_DICES_NUM;
+    }
+
+    @Override
+    public int getEffectiveArmySize() {
+        return armySize - 1;
     }
 }

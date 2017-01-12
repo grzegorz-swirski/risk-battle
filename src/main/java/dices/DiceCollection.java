@@ -11,8 +11,6 @@ import java.util.Random;
 
 public class DiceCollection {
 
-    public static final int MIN_SIZE = 1;
-
     @Getter
     private final Collection<Dice> dices;
 
@@ -22,9 +20,6 @@ public class DiceCollection {
     }
 
     public DiceCollection(final int dicesNum, final int facesNum) {
-        Preconditions.checkArgument(dicesNum >= MIN_SIZE,
-                "Collection of dices must contain at least one dice");
-
         List<Dice> dices = new ArrayList<Dice>();
         for (int i = 0; i < dicesNum; i++) {
             Random randomGenerator = new Random();
