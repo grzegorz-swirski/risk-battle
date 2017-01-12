@@ -19,7 +19,7 @@ public class Defender extends BattleParticipant {
     @Override
     protected void setDiceCollection(final int armySize) {
         int effectiveArmySize = armySize;
-        diceCollection = new DiceCollection((armySize < MAX_DICES_NUM) ?
-                armySize : MAX_DICES_NUM, DICE_FACES_NUM);
+        diceCollection = new DiceCollection((effectiveArmySize < MAX_DICES_NUM) ?
+                effectiveArmySize : MAX_DICES_NUM, DICE_FACES_NUM);
     }
 }
