@@ -4,6 +4,9 @@ import dices.DiceCollection;
 
 public class Attacker extends BattleParticipant {
 
+    private static final int MIN_ARMY_SIZE = 2;
+    private static final int MAX_DICES_NUM = 3;
+
     public Attacker(int armySize) {
         super(armySize);
     }
@@ -15,6 +18,8 @@ public class Attacker extends BattleParticipant {
 
     @Override
     protected void setDiceCollection(final int armySize) {
-        diceCollection = new DiceCollection((armySize >= 2 && armySize <= 4) ? armySize - 1 : 3, 6);
+        int effectiveArmySize = armySize - 1;
+        diceCollection = new DiceCollection((effectiveArmySize < MAX_DICES_NUM) ?
+                effectiveArmySize : MAX_DICES_NUM, DICE_FACES_NUM);
     }
 }

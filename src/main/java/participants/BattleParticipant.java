@@ -10,6 +10,8 @@ import java.util.Collection;
 @Getter
 public abstract class BattleParticipant {
 
+    public static final int DICE_FACES_NUM = 6;
+
     protected int armySize;
     protected DiceCollection diceCollection;
 
